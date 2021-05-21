@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ErrorResponse {
-    String code;
+    String cod;
     String message;
 }

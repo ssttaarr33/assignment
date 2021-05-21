@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class WeatherController {
 
     private final WeatherService weatherService;
+
     private final WeatherMapper mapper;
 
     @GetMapping
     public ResponseEntity<WeatherMapperObject> weatherByCity(@RequestParam("city") String city) {
-        final WeatherEntity weatherEntity = weatherService.getWeatherByCity(city);
-        return ResponseEntity.ok(mapper.weatherEntityToWeatherMapperObject(weatherEntity));
+        final WeatherEntity weatherByCity = weatherService.getWeatherByCity(city);
+        return ResponseEntity.ok(mapper.weatherEntityToWeatherMapperObject(weatherByCity));
     }
 }

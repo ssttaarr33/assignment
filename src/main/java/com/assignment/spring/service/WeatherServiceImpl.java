@@ -7,26 +7,26 @@ import com.assignment.spring.domain.WeatherEntity;
 import com.assignment.spring.repository.WeatherRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @AllArgsConstructor
 @Service
 public class WeatherServiceImpl implements WeatherService {
+
     private final WeatherRepository weatherRepository;
 
-    private final WeatherAPIClient weatherAPIClient;
+    private final WeatherAPIClient apiClient;
 
-    private final WeatherResponseMapper weatherResponseMapper;
+    private final WeatherResponseMapper mapper;
 
-    @Value("${open-weather.app-id}")
-    private final String appId;
+    private final Environment env;
 
     @Override
     public WeatherEntity getWeatherByCity(String city) {
-        WeatherResponse response = weatherAPIClient.getWeatherByCity(city, appId);
-        final WeatherEntity weatherEntity = weatherRepository.save(weatherResponseMapper.weatherResponseToWeatherEntity(response));
-        return weatherEntity;
+        WeatherResponse response = apiClient.getWeatherByCity(city, env.getProperty("APP_ID"));
+        final WeatherEntity entity = weatherRepository.save(mapper.weatherResponseToWeatherEntity(response));
+        return entity;
     }
 }

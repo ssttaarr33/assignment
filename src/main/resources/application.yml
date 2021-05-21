@@ -1,3 +1,12 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
 open-weather:
   app-id: c88d772a3a4f6d35ccfcbd9e55ded64f
   api-url: http://api.openweathermap.org/data/2.5
