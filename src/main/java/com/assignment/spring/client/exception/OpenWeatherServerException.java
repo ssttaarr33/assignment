@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
+public
 class OpenWeatherServerException extends RuntimeException {
 
     private int status;
